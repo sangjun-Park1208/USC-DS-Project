@@ -8,6 +8,7 @@ DAL_df = pd.read_csv('./data/airline_stock/DAL.csv', on_bad_lines='skip')
 LUV_df = pd.read_csv('./data/airline_stock/LUV.csv', on_bad_lines='skip')
 UAL_df = pd.read_csv('./data/airline_stock/UAL.csv', on_bad_lines='skip')
 
+
 # variable identification
 # print('UFO_complete_df.head', UFO_df.head(), sep="\n")
 # print('AAL_df.head', AAL_df.head(), sep="\n")
