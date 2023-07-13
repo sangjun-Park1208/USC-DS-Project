@@ -15,3 +15,4 @@ df['datetime'] = df['datetime'].dt.strftime('%Y-%m-%d')
 df = df.sort_values(by='datetime')
 
 
+print("asdasd")
