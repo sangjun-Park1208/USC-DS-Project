@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5ad78cbc-2776-4fa3-93a9-bae806786b23" name="변경" comment="wj_jul_12">
-      <change beforePath="$PROJECT_DIR$/.idea/USC-DS-Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/USC-DS-Project.iml" afterDir="false" />
+    <list default="true" id="5ad78cbc-2776-4fa3-93a9-bae806786b23" name="변경" comment="wj_jul_13">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wonjun/summer_pro_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/wonjun/earthquake.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wonjun/earthquake.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +53,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/wonjun/earthquake" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="USC-DS-Project" />
@@ -96,7 +100,7 @@
       <workItem from="1689229639545" duration="195000" />
       <workItem from="1689229913702" duration="391000" />
       <workItem from="1689278857459" duration="56000" />
-      <workItem from="1689278934117" duration="3901000" />
+      <workItem from="1689278934117" duration="6097000" />
     </task>
     <task id="LOCAL-00001" summary="wj_jul_12">
       <option name="closed" value="true" />
@@ -122,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689229811582</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="wj_jul_13">
+      <option name="closed" value="true" />
+      <created>1689284676882</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1689284676882</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -141,7 +153,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="wj_jul_12" />
-    <option name="LAST_COMMIT_MESSAGE" value="wj_jul_12" />
+    <MESSAGE value="wj_jul_13" />
+    <option name="LAST_COMMIT_MESSAGE" value="wj_jul_13" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/USC_DS_Project_main$summer_pro_2.coverage" NAME="summer_pro_2 커버리지 결과" MODIFIED="1689226902120" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/wonjun" />
