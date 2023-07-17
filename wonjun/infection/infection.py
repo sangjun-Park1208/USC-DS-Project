@@ -53,5 +53,29 @@ plt.xlabel('Year')
 plt.ylabel('Counts')
 plt.title('UFO Counts and Disease Cases Over Years')
 plt.legend()
-plt.savefig('infection.png', dpi=300)
+# plt.savefig('infection.png', dpi=300)
 plt.show()
+
+# 그래프 그리기
+fig, ax1 = plt.subplots(figsize=(15, 10))
+
+color = 'tab:red'
+ax1.set_xlabel('Year')
+ax1.set_ylabel('UFO Counts', color=color)
+line1, = ax1.plot(merged_data['Year'], merged_data['UFO_counts'], color=color, label='UFO Counts')
+ax1.tick_params(axis='y', labelcolor=color)
+
+ax2 = ax1.twinx()
+color = 'tab:blue'
+ax2.set_ylabel('Disease Cases', color=color)
+line2, = ax2.plot(merged_data['Year'], merged_data['Cases'], color=color, label='Disease Cases')
+ax2.tick_params(axis='y', labelcolor=color)
+
+lines = [line1, line2]
+
+ax1.legend(lines, [l.get_label() for l in lines])
+
+fig.tight_layout()
+plt.title('UFO Counts and Disease Cases Over Years')
+plt.savefig('infection.png', dpi=600)
+# plt.show()
