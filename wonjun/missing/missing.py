@@ -17,11 +17,21 @@ def convert_to_datetime(date_str):
 ufo_df = pd.read_csv('../../data/ufo_after/complete_after.csv')
 missing_df = pd.read_csv('../../data/missing/Missing Females.csv',  encoding='ISO-8859-1')
 
+# Define the latitude and longitude range for the United States
+lat_range = (24.396308, 49.384358)
+lon_range = (-125.000000, -66.934570)
+
 # Preprocess UFO data
 ufo_df['datetime'] = pd.to_datetime(ufo_df['datetime'])
+ufo_df = ufo_df[(ufo_df['datetime'].dt.year >= 1910) & (ufo_df['datetime'].dt.year <= 2014)]  # year filter
 ufo_df['time'] = pd.to_datetime(ufo_df['time'], format='%H:%M').dt.time
 ufo_df['latitude'] = pd.to_numeric(ufo_df['latitude'])
 ufo_df['longitude'] = pd.to_numeric(ufo_df['longitude'])
+
+# Filter the UFO data by location (within the United States)
+ufo_df = ufo_df[(ufo_df['latitude'] >= lat_range[0]) & (ufo_df['latitude'] <= lat_range[1]) &
+                (ufo_df['longitude'] >= lon_range[0]) & (ufo_df['longitude'] <= lon_range[1])]
+
 ufo_df = ufo_df[['datetime', 'time', 'latitude', 'longitude']]
 
 # Preprocess missing data
@@ -29,8 +39,14 @@ missing_df['Date'] = missing_df['Date'].astype(str)
 missing_df = missing_df[~missing_df['Date'].str.contains('Seattle, Washington')]
 missing_df['Date'] = missing_df['Date'].replace({'Februrary 8, 1992': 'February 8, 1992', 'Deptember 17, 1992': 'September 17, 1992'})
 missing_df['Date'] = missing_df['Date'].apply(convert_to_datetime)
+missing_df = missing_df[(missing_df['Date'].dt.year >= 1910) & (missing_df['Date'].dt.year <= 2014)]  # year filter
 missing_df['latitude'] = pd.to_numeric(missing_df['latitude'])
 missing_df['longitude'] = pd.to_numeric(missing_df['longitude'])
+
+# Filter the missing data by location (within the United States)
+missing_df = missing_df[(missing_df['latitude'] >= lat_range[0]) & (missing_df['latitude'] <= lat_range[1]) &
+                        (missing_df['longitude'] >= lon_range[0]) & (missing_df['longitude'] <= lon_range[1])]
+
 missing_df = missing_df[['Date', 'latitude', 'longitude']]
 
 # Rename columns for merge
@@ -94,9 +110,19 @@ print(f"Proportion of events within {threshold_distance} km: {proportion_close}"
 plt.figure(figsize=(10, 6))
 ufo_df['datetime'].value_counts().resample('M').sum().plot(label='UFO sightings')
 missing_df['datetime'].value_counts().resample('M').sum().plot(label='Missing persons')
+plt.yscale('log')  # Set y-axis to log scale
 plt.legend()
-plt.title('Time Series of UFO Sightings and Missing Persons')
+plt.title('Time Series of UFO Sightings and Missing Persons (Log Scale)')
 plt.xlabel('Time')
-plt.ylabel('Count')
-plt.savefig('missing3.png', dpi=600)
+plt.ylabel('Count (Log Scale)')
+plt.savefig('missing4.png', dpi=600)
+
+# plt.figure(figsize=(10, 6))
+# ufo_df['datetime'].value_counts().resample('M').sum().plot(label='UFO sightings')
+# missing_df['datetime'].value_counts().resample('M').sum().plot(label='Missing persons')
+# plt.legend()
+# plt.title('Time Series of UFO Sightings and Missing Persons')
+# plt.xlabel('Time')
+# plt.ylabel('Count')
+# plt.savefig('missing4.png', dpi=600)
 # plt.show()
