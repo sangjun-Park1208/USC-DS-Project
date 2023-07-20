@@ -9,7 +9,7 @@ disaster_data = pd.read_csv('num_disaster_data.csv')
 # 데이터 병합
 merged_data = pd.merge(ufo_data, disaster_data, left_on='year', right_on='declaration_date', how='inner')
 
-# 상관관계 계산
+# 상관관계 계산 u_num는 ufor관측빈도, number는 자연재해 빈도
 correlation = merged_data['u_num'].corr(merged_data['number'])
 
 # 결과 출력

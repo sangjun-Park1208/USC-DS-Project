@@ -8,6 +8,7 @@ data['declaration_year'] = pd.to_datetime(data['declaration_date']).dt.year
 data['declaration_month'] = pd.to_datetime(data['declaration_date']).dt.month
 data['declaration_day'] = pd.to_datetime(data['declaration_date']).dt.day
 
+# 날짜를 연도, 월, 일로 분해
 data['datetime_year'] = pd.to_datetime(data['datetime']).dt.year
 data['datetime_month'] = pd.to_datetime(data['datetime']).dt.month
 data['datetime_day'] = pd.to_datetime(data['datetime']).dt.day
