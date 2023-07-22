@@ -1,7 +1,7 @@
 import pandas as pd
 
 # UFO 데이터 로드
-ufo_data = pd.read_csv('complete_after.csv')
+ufo_data = pd.read_csv('disaster/scv/complete_after.csv')
 
 # 필요한 열 선택
 ufo_data = ufo_data[['datetime', 'state', 'country']]

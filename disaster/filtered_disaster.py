@@ -1,7 +1,7 @@
 import pandas as pd
 
 # 자연재해 데이터 로드
-disaster_data = pd.read_csv('disaster/us_disaster_declarations.csv')
+disaster_data = pd.read_csv('disaster/scv/filtered_disaster_data.csv')
 
 # 'declaration_date' 열에서 시간 부분 제거하여 날짜로 변환
 disaster_data['declaration_date'] = pd.to_datetime(disaster_data['declaration_date']).dt.strftime('%Y-%m-%d')

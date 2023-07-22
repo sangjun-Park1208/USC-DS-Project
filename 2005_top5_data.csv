@@ -1,0 +1,93 @@
+state,incident_type,count
+AK,Severe Storm,5
+AL,Hurricane,141
+AR,Hurricane,75
+AZ,Fire,8
+AZ,Hurricane,15
+AZ,Severe Storm,20
+CA,Fire,9
+CA,Hurricane,58
+CA,Severe Storm,15
+CO,Coastal Storm,64
+CO,Fire,2
+CT,Hurricane,8
+CT,Severe Storm,5
+CT,Snowstorm,8
+DC,Hurricane,1
+DE,Hurricane,3
+FL,Hurricane,122
+GA,Hurricane,159
+HI,Fire,4
+HI,Severe Storm,1
+IA,Hurricane,99
+ID,Hurricane,44
+IL,Hurricane,102
+IL,Snowstorm,16
+IN,Hurricane,92
+IN,Severe Storm,87
+IN,Snowstorm,50
+KS,Hurricane,105
+KS,Severe Storm,46
+KY,Hurricane,120
+KY,Severe Storm,2
+KY,Snowstorm,30
+LA,Hurricane,255
+LA,Severe Storm,5
+MA,Hurricane,14
+MA,Severe Storm,12
+MA,Snowstorm,14
+MD,Hurricane,24
+ME,Hurricane,15
+ME,Severe Storm,13
+ME,Snowstorm,27
+MI,Hurricane,83
+MN,Hurricane,87
+MO,Hurricane,115
+MS,Hurricane,135
+MT,Hurricane,56
+NC,Hurricane,147
+ND,Coastal Storm,53
+ND,Severe Storm,29
+ND,Snowstorm,21
+NE,Hurricane,93
+NE,Severe Storm,11
+NH,Hurricane,10
+NH,Severe Storm,6
+NH,Snowstorm,19
+NJ,Hurricane,21
+NJ,Severe Storm,9
+NM,Hurricane,33
+NV,Fire,6
+NV,Hurricane,17
+NV,Severe Storm,2
+NV,Snowstorm,31
+NY,Hurricane,62
+NY,Severe Storm,21
+OH,Hurricane,88
+OH,Severe Storm,62
+OH,Snowstorm,26
+OK,Fire,7
+OK,Hurricane,77
+OR,Coastal Storm,36
+OR,Fire,1
+PA,Hurricane,67
+PA,Severe Storm,11
+PR,Severe Storm,17
+RI,Hurricane,5
+RI,Snowstorm,5
+SC,Hurricane,46
+SD,Coastal Storm,66
+SD,Fire,3
+SD,Severe Storm,33
+TN,Hurricane,95
+TX,Fire,2
+TX,Hurricane,763
+UT,Coastal Storm,29
+UT,Fire,1
+UT,Severe Storm,2
+VA,Hurricane,134
+WA,Coastal Storm,39
+WA,Fire,3
+WI,Hurricane,73
+WV,Hurricane,55
+WV,Severe Storm,6

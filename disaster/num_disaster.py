@@ -1,7 +1,7 @@
 import pandas as pd
 
 # disaster.csv 파일 로드
-df = pd.read_csv('filtered_disaster_data.csv')
+df = pd.read_csv('disaster/scv/filtered_disaster_data.csv')
 
 # declaration_date 열을 datetime 형식으로 변환
 df['declaration_date'] = pd.to_datetime(df['declaration_date'])

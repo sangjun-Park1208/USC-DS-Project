@@ -23,7 +23,7 @@
 import pandas as pd
 
 # filtered_ufo_data.csv 파일 로드
-df = pd.read_csv('filtered_ufo_data.csv')
+df = pd.read_csv('disaster/scv/filtered_ufo_data.csv')
 
 # datetime 열을 datetime 형식으로 변환
 df['datetime'] = pd.to_datetime(df['datetime'])

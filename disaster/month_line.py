@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # num_ufo_data.csv 파일 로드
-ufo_data = pd.read_csv('num_ufo_data.csv')
+ufo_data = pd.read_csv('disaster/scv/num_ufo_data.csv')
 
 # num_disaster_data.csv 파일 로드
 disaster_data = pd.read_csv('num_disaster_data.csv')

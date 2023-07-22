@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # 데이터 로드
-ufo_data = pd.read_csv('filtered_ufo_data.csv')
+ufo_data = pd.read_csv('disaster/scv/filtered_disaster_data.csv')
 
 # 'datetime' 열에서 연도 추출
 ufo_data['year'] = pd.to_datetime(ufo_data['datetime']).dt.year
@@ -17,6 +17,6 @@ ufo_frequency = ufo_data['year'].value_counts().sort_index()
 plt.plot(ufo_frequency.index, ufo_frequency.values)
 plt.xlabel('Year')
 plt.ylabel('UFO Frequency')
-plt.title('UFO Sightings Frequency (1960-2014)')
+plt.title('UFO Sightings Frequency (1953-2014)')
 plt.savefig('UFO_1.png', dpi=600)
 plt.show()

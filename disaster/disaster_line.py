@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # 데이터 로드
-disaster_data = pd.read_csv('filtered_disaster_data.csv')
+disaster_data = pd.read_csv('disaster/scv/filtered_disaster_data.csv')
 
 # 'declaration_date' 열에서 연도 추출
 disaster_data['year'] = pd.to_datetime(disaster_data['declaration_date']).dt.year
