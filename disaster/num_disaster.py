@@ -24,4 +24,5 @@ df.rename(columns={'incident_type': 'number'}, inplace=True)
 # 결과 출력
 print(df)
 
+# 데이터 저장
 df.to_csv('num_disaster_data.csv', index=False)
