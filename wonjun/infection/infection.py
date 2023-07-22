@@ -6,6 +6,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 from statsmodels.tsa.stattools import grangercausalitytests
+from sklearn.model_selection import cross_val_score
 
 
 # 0.데이터 전처리 과정
@@ -62,6 +63,41 @@ plt.title('UFO Counts and Disease Cases Over Years')
 plt.savefig('1_infection_log_scale.png', dpi=600)
 
 
+# # 2. 이상치 판별
+# ufo_counts_zscore = np.abs((merged_data['UFO_counts'] - merged_data['UFO_counts'].mean()) / merged_data['UFO_counts'].std())
+# disease_cases_zscore = np.abs((merged_data['Cases'] - merged_data['Cases'].mean()) / merged_data['Cases'].std())
+# outlier_threshold = 3
+# # UFO Counts 이상치
+# ufo_outliers = merged_data[ufo_counts_zscore > outlier_threshold]
+# # Disease Cases 이상치
+# disease_outliers = merged_data[disease_cases_zscore > outlier_threshold]
+# # 이상치 출력
+# if not ufo_outliers.empty:
+#     print('Outliers in UFO counts:')
+#     print(ufo_outliers)
+# else:
+#     print('No outliers found in UFO counts.')
+#
+# if not disease_outliers.empty:
+#     print('Outliers in Disease cases:')
+#     print(disease_outliers)
+# else:
+#     print('No outliers found in Disease cases.')
+# # 이상치 그래프 시각화(Box Plots)
+# plt.figure(figsize=(15, 10))
+# # Box plot for UFO
+# plt.subplot(2, 1, 1)
+# plt.boxplot(merged_data['UFO_counts'], vert=False)
+# plt.xlabel('UFO Counts')
+# plt.title('Box Plot for UFO Counts')
+# # Box plot for Disease
+# plt.subplot(2, 1, 2)
+# plt.boxplot(merged_data['Cases'], vert=False)
+# plt.xlabel('Disease Cases')
+# plt.title('Box Plot for Disease Cases')
+# plt.tight_layout()
+# plt.savefig('2_box_plots.png', dpi=600)
+
 # 2. 이상치 판별
 ufo_counts_zscore = np.abs((merged_data['UFO_counts'] - merged_data['UFO_counts'].mean()) / merged_data['UFO_counts'].std())
 disease_cases_zscore = np.abs((merged_data['Cases'] - merged_data['Cases'].mean()) / merged_data['Cases'].std())
@@ -82,6 +118,7 @@ if not disease_outliers.empty:
     print(disease_outliers)
 else:
     print('No outliers found in Disease cases.')
+
 # 이상치 그래프 시각화(Box Plots)
 plt.figure(figsize=(15, 10))
 # Box plot for UFO
@@ -89,13 +126,21 @@ plt.subplot(2, 1, 1)
 plt.boxplot(merged_data['UFO_counts'], vert=False)
 plt.xlabel('UFO Counts')
 plt.title('Box Plot for UFO Counts')
+# Adding arrows to UFO outliers
+if not ufo_outliers.empty:
+    for outlier, year in zip(ufo_outliers['UFO_counts'], ufo_outliers['Year']):
+        plt.annotate(f'Outlier in {year}', xy=(outlier, 1), xytext=(outlier, 1.5),
+                     arrowprops=dict(arrowstyle='->', lw=1), ha='center')
+
 # Box plot for Disease
 plt.subplot(2, 1, 2)
 plt.boxplot(merged_data['Cases'], vert=False)
 plt.xlabel('Disease Cases')
 plt.title('Box Plot for Disease Cases')
 plt.tight_layout()
-plt.savefig('2_box_plots.png', dpi=600)
+plt.savefig('2_1_box_plots.png', dpi=600)
+
+
 
 
 # 3. 특정계절에 따른 관측 횟수 시각화
@@ -121,23 +166,29 @@ X = merged_data['Year'].values.reshape(-1, 1)
 y = merged_data['Cases']
 # 다항식 특징 생성
 X_poly = poly_features.fit_transform(X)
-# 모델 생성 및 훈련
+# 모델 생성
 model = LinearRegression()
+# Cross validation
+cv_scores = cross_val_score(model, X_poly, y, cv=5)
+print("Cross-validation scores: ", cv_scores)
+print("Average cross-validation score: ", cv_scores.mean())
+# 모델 훈련
 model.fit(X_poly, y)
 # 예측 수행
 y_poly_pred = model.predict(X_poly)
 # R^2 Score 계산
-r2_score_value = r2_score(y, y_poly_pred)
-print('R^2 Score:', r2_score_value)
+r2_score = r2_score(y, y_poly_pred)
+print('R^2 Score:', r2_score)
 # 원래의 데이터와 비선형 회귀 결과를 그래프로 그림
+plt.figure(figsize=(10, 6))
 plt.scatter(X, y, color='blue', label='Actual Cases')
 plt.plot(X, y_poly_pred, color='red', label='Predicted Cases')
 plt.title('Disease Cases Over Years')
 plt.xlabel('Year')
 plt.ylabel('Cases')
 plt.legend()
-plt.savefig('4_Disease Cases Over Years.png', dpi=600)
 plt.show()
+
 
 # 5. 다변량 회귀분석
 # Multivariate Regression_shape.py

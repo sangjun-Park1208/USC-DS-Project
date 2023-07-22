@@ -1,0 +1,167 @@
+# # import geopandas as gpd
+# # import pandas as pd
+# # import folium
+# # from folium.plugins import HeatMap
+# # import branca
+# # from selenium import webdriver
+# #
+# # # 미국 지도 데이터 로드
+# # usa = gpd.read_file('https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json')
+# #
+# # # 아래스카와 하와이 제외
+# # usa = usa.loc[~usa['name'].isin(['Alaska', 'Hawaii'])]
+# #
+# # # 인구밀도 데이터 로드
+# # population = pd.read_csv('../../data/popul/us_pop_by_state.csv')
+# #
+# # # UFO 데이터 로드
+# # ufo = pd.read_csv('../../data/ufo_after/complete_after.csv')
+# #
+# # # UFO 데이터에서 각 주별 관측 횟수를 계산
+# # ufo['count'] = 1
+# # ufo_counts = ufo.groupby('state').count().reset_index()
+# #
+# # # 데이터 병합
+# # usa = usa.merge(population, how='left', left_on='name', right_on='state')
+# # usa = usa.merge(ufo_counts, how='left', left_on='name', right_on='state')
+# #
+# # # 기본 맵 만들기
+# # m = folium.Map(location=[37.8, -96], zoom_start=4)
+# #
+# # # 인구밀도 표시 (Choropleth 레이어)
+# # choro = folium.Choropleth(
+# #     geo_data=usa.__geo_interface__,
+# #     data=usa,
+# #     columns=['name', '2020_census'],
+# #     key_on='feature.properties.name',
+# #     fill_color='BuPu',  # Blue-Purple colormap
+# #     fill_opacity=0.7,
+# #     line_opacity=0.2,
+# #     legend_name='Population Density',
+# # )
+# # choro.add_to(m)
+# #
+# # # 범례 추가
+# # colormap = branca.colormap.linear.BuPu_09.scale(usa['2020_census'].min(), usa['2020_census'].max())
+# # colormap.caption = "Population Density"
+# # colormap.add_to(m)
+# #
+# # # UFO 관측 히트맵 (HeatMap 레이어)
+# # ufo_locations = ufo[['latitude', 'longitude']].dropna().values
+# # HeatMap(ufo_locations, radius=15).add_to(m)
+# #
+# # # 맵 저장 (HTML)
+# # html_file = 'ufo_and_population_density.html'
+# # m.save(html_file)
+# #
+# # # # # HTML을 PNG로 변환
+# # # # browser = webdriver.Firefox()  # Or use another driver if you prefer
+# # # # browser.get('file:///' + html_file)
+# # # # browser.save_screenshot('ufo_and_population_density.png')
+# # # # browser.quit()
+# #
+# import geopandas as gpd
+# import pandas as pd
+# import folium
+# from folium.plugins import HeatMap
+# import branca
+#
+# # 미국 지도 데이터 로드
+# usa = gpd.read_file('https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json')
+#
+# # 아래스카와 하와이 제외
+# usa = usa.loc[~usa['name'].isin(['Alaska', 'Hawaii'])]
+#
+# # 인구밀도 데이터 로드
+# population = pd.read_csv('../../data/popul/us_pop_by_state.csv')
+#
+# # UFO 데이터 로드
+# ufo = pd.read_csv('../../data/ufo_after/complete_after.csv')
+#
+# # UFO 데이터에서 각 주별 관측 횟수를 계산
+# ufo['count'] = 1
+# ufo_counts = ufo.groupby('state').count().reset_index()
+#
+# # 데이터 병합
+# usa = usa.merge(population, how='left', left_on='name', right_on='state')
+# usa = usa.merge(ufo_counts, how='left', left_on='name', right_on='state')
+#
+# # 기본 맵 만들기
+# m = folium.Map(location=[37.8, -96], zoom_start=4)
+#
+# # 인구밀도 표시 (Choropleth 레이어)
+# choro = folium.Choropleth(
+#     geo_data=usa.__geo_interface__,
+#     data=usa,
+#     columns=['name', '2020_census'],
+#     key_on='feature.properties.name',
+#     fill_color='BuPu',  # Blue-Purple colormap
+#     fill_opacity=0.7,
+#     line_opacity=0.2,
+#     legend_name='Population Density',
+# )
+# choro.add_to(m)
+#
+# # 범례 추가
+# colormap = branca.colormap.linear.BuPu_09.scale(usa['2020_census'].min(), usa['2020_census'].max())
+# colormap.caption = "Population Density"
+# colormap.add_to(m)
+#
+# # UFO 관측 히트맵 (HeatMap 레이어)
+# ufo_locations = ufo[['latitude', 'longitude']].dropna().values
+# HeatMap(ufo_locations, radius=15, gradient={0.2: 'blue', 0.4: 'lime', 0.6: 'orange', 1: 'red'}).add_to(m)  # Different colormap
+#
+# # 맵 저장 (HTML)
+# html_file = 'ufo_and_population_density.html'
+# m.save(html_file)
+import geopandas as gpd
+import pandas as pd
+import folium
+from folium.plugins import MarkerCluster
+
+# 미국 지도 데이터 로드
+usa = gpd.read_file('https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json')
+
+# 아래스카와 하와이 제외
+usa = usa.loc[~usa['name'].isin(['Alaska', 'Hawaii'])]
+
+# 인구밀도 데이터 로드
+population = pd.read_csv('../../data/popul/us_pop_by_state.csv')
+
+# UFO 데이터 로드
+ufo = pd.read_csv('../../data/ufo_after/complete_after.csv')
+
+# UFO 데이터에서 각 주별 관측 횟수를 계산
+ufo['count'] = 1
+ufo_counts = ufo.groupby('state').count().reset_index()
+
+# 데이터 병합
+usa = usa.merge(population, how='left', left_on='name', right_on='state')
+usa = usa.merge(ufo_counts, how='left', left_on='name', right_on='state')
+
+# 기본 맵 만들기
+m = folium.Map(location=[37.8, -96], zoom_start=4)
+
+# 인구밀도 표시 (Choropleth 레이어)
+choro = folium.Choropleth(
+    geo_data=usa.__geo_interface__,
+    data=usa,
+    columns=['name', '2020_census'],
+    key_on='feature.properties.name',
+    fill_color='YlOrRd',
+    fill_opacity=0.7,
+    line_opacity=0.2,
+    legend_name='Population Density',
+)
+choro.add_to(m)
+
+# UFO 관측 마커 (MarkerCluster 레이어)
+ufo_sample = ufo[['latitude', 'longitude']].dropna().sample(n=1000)  # Randomly sample 1000 points
+marker_cluster = MarkerCluster().add_to(m)
+for idx, row in ufo_sample.iterrows():
+    folium.Marker([row['latitude'], row['longitude']]).add_to(marker_cluster)
+
+# 맵 저장 (HTML)
+html_file = 'ufo_and_population_density.html'
+m.save(html_file)
+
